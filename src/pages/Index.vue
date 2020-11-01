@@ -17,7 +17,8 @@ import { defineComponent, ref } from '@vue/composition-api';
 export default defineComponent({
   name: 'PageIndex',
   components: { ExampleComponent },
-  setup() {
+  setup(_, ctx) {
+    ctx.root.$q.bex.on('newBookMark', console.log);
     const todos = ref<Todo[]>([
       {
         id: 1,

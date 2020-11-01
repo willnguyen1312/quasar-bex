@@ -39,23 +39,27 @@ export default function attachBackgroundHooks(
     });
   });
 
-  /*
+  // /*
   // EXAMPLES
   // Listen to a message from the client
   bridge.on('test', d => {
-    console.log(d)
-  })
+    console.log(d);
+  });
 
   // Send a message to the client based on something happening.
   chrome.tabs.onCreated.addListener(tab => {
-    bridge.send('browserTabCreated', { tab })
-  })
+    bridge.send('browserTabCreated', { tab });
+  });
 
   // Send a message to the client based on something happening.
   chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.url) {
-      bridge.send('browserTabUpdated', { tab, changeInfo })
+      bridge.send('browserTabUpdated', { tab, changeInfo });
     }
-  })
-   */
+  });
+
+  chrome.bookmarks.onCreated.addListener(() => {
+    bridge.send('newBookMark', { hello: 123 });
+  });
+  //  */
 }

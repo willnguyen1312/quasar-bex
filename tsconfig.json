@@ -3,5 +3,5 @@
   "compilerOptions": {
     "baseUrl": "."
   },
-  "exclude": ["*/.js"]
+  "exclude": ["src-bex/**/*/.js"]
 }
