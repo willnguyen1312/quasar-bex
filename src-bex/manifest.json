@@ -1,5 +1,5 @@
 {
-  "name": "bookmark-tree",
+  "name": "Bookmark Tree",
   "description": "A Quasar web extension",
   "version": "1.0.0",
   "manifest_version": 2,
@@ -9,7 +9,7 @@
     "128": "icons/icon-128x128.png"
   },
   "browser_action": {
-    "default_title": "bookmark-tree"
+    "default_title": "Bookmark Tree"
   },
   "background": {
     "scripts": ["www/bex-background.js", "js/background.js"],
