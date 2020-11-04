@@ -1,8 +1,8 @@
 {
-  "name": "quasar-bex",
+  "name": "bookmark-tree",
   "version": "0.0.1",
   "description": "My playground with Quasar and Browser Extension",
-  "productName": "Quasar Bex",
+  "productName": "Bookrmark Tree",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "private": true,
   "scripts": {
