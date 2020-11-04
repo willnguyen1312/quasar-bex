@@ -34,4 +34,5 @@ export interface QTreeNode {
   lazy?: boolean;
   header?: string;
   body?: string;
+  url?: string;
 }
