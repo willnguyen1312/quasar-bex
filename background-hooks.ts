@@ -6,14 +6,8 @@
 export default function attachBackgroundHooks(
   bridge /* , allActiveConnections */
 ) {
-  bridge.on('init', event => {
-    chrome.bookmarks.getTree(results => {
-      bridge.send(event.eventResponseKey, results);
-    });
-  });
-
-  chrome.bookmarks.onCreated.addListener(() => {
-    bridge.send('newBookMark', { hello: 123 });
-  });
+  chrome.bookmarks.getTree(results => {
+    bridge.se
+  })
   //  */
 }

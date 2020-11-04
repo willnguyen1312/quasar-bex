@@ -1,50 +1,40 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
-  </q-page>
+  <div class="q-pa-md q-gutter-sm">
+    <q-tree :nodes="bookmarkTreeNodes" node-key="label"></q-tree>
+  </div>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/CompositionComponent.vue';
-import { defineComponent, ref } from '@vue/composition-api';
+import { defineComponent, onMounted, ref } from '@vue/composition-api';
+import {
+  InitEventResponse,
+  QTreeNode,
+  BookmarkTreeNode
+} from 'src/components/models';
+
+const convertToQTreeNode = (bookmarks: BookmarkTreeNode[]): QTreeNode[] => {
+  return bookmarks.map<QTreeNode>(bookmark => ({
+    label: bookmark.title,
+    children: convertToQTreeNode(bookmark.children || [])
+  }));
+};
 
 export default defineComponent({
   name: 'PageIndex',
-  components: { ExampleComponent },
+  components: {},
   setup(_, ctx) {
-    ctx.root.$q.bex.on('newBookMark', console.log);
-    const todos = ref<Todo[]>([
-      {
-        id: 1,
-        content: 'ct1'
-      },
-      {
-        id: 2,
-        content: 'ct2'
-      },
-      {
-        id: 3,
-        content: 'ct3'
-      },
-      {
-        id: 4,
-        content: 'ct4'
-      },
-      {
-        id: 5,
-        content: 'ct5'
-      }
-    ]);
-    const meta = ref<Meta>({
-      totalCount: 1200
+    const bookmarkTreeNodes = ref<QTreeNode[]>([]);
+    onMounted(async () => {
+      const response = await (ctx.root.$q.bex.send('init') as Promise<
+        InitEventResponse
+      >);
+
+      const treeValue = convertToQTreeNode(response.data);
+
+      bookmarkTreeNodes.value = treeValue;
     });
-    return { todos, meta };
+
+    return { bookmarkTreeNodes };
   }
 });
 </script>
